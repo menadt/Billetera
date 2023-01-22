@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1> Saldos </h1>
+
+<table>
+    <tr>
+        <th> Cuenta </th>
+        <th> Saldo </th>
+    </tr>
+    {% for saldo in saldos %}
+ 
+    {% endfor %}
+</table>
+{% endblock  %}

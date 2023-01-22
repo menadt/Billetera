@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Movimientos</h1>
+
+    <nav>
+        {% if user.is_authenticated %}
+            {{error}}
+            <a class="btn btn-primary" role="button" href="/movimientos/crearMovimientos/" > Crear Movimiento</a>
+        {% endif %}
+    </nav>
+    <nav>
+    <table class="table table-stripped table-hover">
+    <thead> 
+    <tr>
+        <th> Fecha </th>
+        <th> Detalle </th>
+        <th> Monto </th>
+        <th> Tipo </th>
+        <th> Cuenta </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for movimiento in listaMovimientos %}
+        <tr>
+        <th>
+            {{movimiento.fecha}}
+        </th>
+        <th>
+           <a href="{% url 'modificarMovimientos' movimiento.id %}"> 
+            {{movimiento.detalle}}
+           </a>
+        </th>
+        <th>
+            {{movimiento.monto}}
+        </th>
+        <th>
+            {{movimiento.tipo}}
+        </th>
+        <th>
+            {{movimiento.cuenta}}
+        </th>
+        </tr>
+    {% endfor %}
+    </tr>
+    </tbody>
+    </table>
+    <nav>
+
+{% endblock  %}
