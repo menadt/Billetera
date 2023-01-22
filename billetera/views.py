@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from .forms import formCrearMovimiento
-from .models import Movimiento, Cuenta
+from .models import Movimiento
 
 # Create your views here.
 def home (request):
@@ -49,6 +49,12 @@ def crearMovimiento(request):
             nuevo_movimiento = formulario.save(commit=False)
             nuevo_movimiento.cuenta = request.user
             nuevo_movimiento.save()
+           # cuenta = get_object_or_404(Cuenta, usuario=request.user)
+           # if nuevo_movimiento.tipo == "Ingreso":
+           #     cuenta.saldo+=nuevo_movimiento.monto
+           # else:
+           #     cuenta.saldo= cuenta.saldo - nuevo_movimiento.monto
+           # cuenta.save()
             return redirect('movimientos')
         except:
             return render(request, 'crearMovimientos.html', {
