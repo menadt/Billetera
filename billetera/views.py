@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
+from django.db.models import Sum
 from .forms import formCrearMovimiento
 from .models import Movimiento
 
@@ -116,6 +117,9 @@ def saldos(request):
     users = User.objects.all()
     saldos={}
     for user in users:
-        operaciones = Movimiento.objects.filter(cuenta=request.user)
-        suma=0
+        suma = Movimiento.objects.filter(cuenta=user.id, tipo="Ingreso").aggregate(Sum('monto'))
+        resta = Movimiento.objects.filter(cuenta=user.id, tipo="Egreso").aggregate(Sum('monto'))
+        aux=suma['monto__sum']-resta['monto__sum']
+        saldos[user.username]=aux
+    print(saldos)
     return render(request, 'saldos.html', saldos)

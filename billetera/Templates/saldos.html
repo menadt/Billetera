@@ -3,13 +3,26 @@
 {% block content %}
 <h1> Saldos </h1>
 
-<table>
+<table class="table table-stripped table-hover">
+    <thead> 
     <tr>
         <th> Cuenta </th>
         <th> Saldo </th>
     </tr>
-    {% for saldo in saldos %}
- 
-    {% endfor %}
+    </thead>
+    <tbody>
+        <tr>
+            <th> tincho</th>
+            <th> {{tincho}} </th>
+        </tr>
+        <tr>
+            <th> Javi</th>
+            <th> {{Javi}} </th>
+        </tr>
+        <tr>
+            <th> Santi</th>
+            <th> {{Santi}} </th>
+        </tr>
+    </tbody>
 </table>
 {% endblock  %}
