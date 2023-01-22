@@ -117,8 +117,8 @@ def saldos(request):
     users = User.objects.all()
     saldos={}
     for user in users:
-        suma = Movimiento.objects.filter(cuenta=user.id, tipo="Ingreso").aggregate(Sum('monto'))
-        resta = Movimiento.objects.filter(cuenta=user.id, tipo="Egreso").aggregate(Sum('monto'))
+        suma = Movimiento.objects.filter(cuenta=user.id, tipo="Ingreso").aggregate(Sum('monto', default=0))
+        resta = Movimiento.objects.filter(cuenta=user.id, tipo="Egreso").aggregate(Sum('monto', default=0))
         aux=suma['monto__sum']-resta['monto__sum']
         saldos[user.username]=aux
     print(saldos)
